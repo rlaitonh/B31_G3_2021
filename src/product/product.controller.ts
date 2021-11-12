@@ -25,20 +25,6 @@ export class ProductController {
             data: product
         });
     }
-    @Get('/getBy?')
-    async getProductBy(
-        @Res() Res, 
-        @Query('productName')name,
-        @Query('productCategory')category
-        ){
-        const product = await this.productService.getProductBy(name,category);
-        if (!product){
-            throw new NotFoundException('product does not found');
-        }
-        return Res.status(HttpStatus.OK).json({
-            data: product
-        });
-    }
     @Post('create')
     async createNewProduct(@Res() res, @Body() createProductDTO:CreateProductDTO  ){
         

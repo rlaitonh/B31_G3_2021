@@ -7,3 +7,8 @@ export class CreateProductDTO {
     readonly image: string;
     readonly createdAt:Date;
 }
+
+export class GetProductByDTO {
+    readonly category: string;
+    readonly name: string;
+}
