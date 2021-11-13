@@ -1,5 +1,6 @@
 export class createInvoiceDTO {
-    readonly name: string;
+    readonly firstName: string;
+    readonly lasName: string; 
     readonly email: string;
     readonly phone: string;
     readonly address: string;
