@@ -10,7 +10,7 @@ import { InvoiceModule } from './invoice/invoice.module';
 @Module({
   imports: [
     ProductModule,
-    MongooseModule.forRoot('mongodb+srv://root:1234@cluster0.qf0yy.mongodb.net/onlypans_DB?retryWrites=true&w=majority',{
+    MongooseModule.forRoot ('mongodb+srv://root:root@cluster0.frpti.mongodb.net/db_onlyPans3',{
     useNewUrlParser: true
     }),
     ShoppingCartModule,
