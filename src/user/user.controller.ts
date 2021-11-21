@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Param, Post, Put, Query, Res } from '@nestjs/common';
 import { CreateProductDTO } from 'src/product/dto/create_product.dto';
 import { CreateUserDTO } from './dto/create_user.dto';
 import { UserService } from './user.service';
@@ -9,7 +9,7 @@ export class UserController {
     constructor(private readonly userService:UserService){}
 
     @Get()
-    async getUserList(@Res() res){
+    async getUsers(@Res() res){
         const users = await this.userService.getUsers();
 
         return res.status(HttpStatus.OK).json({
@@ -18,7 +18,24 @@ export class UserController {
         });
     }
 
-    @Post('create')
+
+    @Get('/:userId')
+    async getUser(@Res() res, @Param('userId') id ){
+        const user = await this.userService.getUserByID(id);
+
+        if(!user){
+            throw new NotFoundException('Student does not exists');
+        }
+
+        return res.status(HttpStatus.OK).json({
+            message: 'User found',
+            data: user
+        });
+
+    }
+
+
+    @Post('/create')
     async createNewUser(@Res() res, @Body() createUserDTO:CreateUserDTO){
         
         const user = await this.userService.createUser(createUserDTO);
@@ -27,6 +44,39 @@ export class UserController {
             message: "User Created",
             data: user
         });
+     }
+
+
+     @Put('/update/:userId')
+     async updateUser(  @Res() res, @Body() createUserDTO: CreateUserDTO, @Param('userId') id){
+         const user = await this.userService.updateUser(id, createUserDTO);
  
-    }
+         if(!user){
+             throw new NotFoundException('User does not exists');
+         }
+ 
+         return res.status(HttpStatus.OK).json({
+             message: 'User updated',
+             data: user
+         });
+     }
+ 
+
+     
+
+     @Delete('/:userId')
+     async deleteUser(@Res() res, @Param('userId') id){
+         
+         const user = await this.userService.deleteUser(id);
+ 
+         if(!user){
+             throw new NotFoundException('User does not exists');
+         }
+ 
+         return res.status(HttpStatus.OK).json({
+             message: 'User deleted',
+             data: user
+         });
+     }
+
 }
