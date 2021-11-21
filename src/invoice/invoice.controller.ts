@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Post, Put, Query, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Param, Post, Put, Query, Res } from '@nestjs/common';
 import { createInvoiceDTO } from './dto/create_invoice.dto';
 import { InvoiceService } from './invoice.service';
 
@@ -24,9 +24,9 @@ export class InvoiceController {
             data: Invoice
         });
     }
-    @Delete('/deleteById/:invoiceId')
+    @Delete('/:invoiceId')
 
-    async deleteInvoice(@Res() res, @Query('invoiceId') id){
+    async deleteInvoice(@Res() res, @Param('invoiceId') id){
         
         const invoice = await this.invoiceService.deleteInvoice(id);
 
