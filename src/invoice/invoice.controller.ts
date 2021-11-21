@@ -24,7 +24,8 @@ export class InvoiceController {
             data: Invoice
         });
     }
-    @Delete('/delete')
+    @Delete('/deleteById/:invoiceId')
+
     async deleteInvoice(@Res() res, @Query('invoiceId') id){
         
         const invoice = await this.invoiceService.deleteInvoice(id);

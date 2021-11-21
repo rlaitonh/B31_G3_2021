@@ -9,7 +9,7 @@ import { InvoiceModule } from './invoice/invoice.module';
 
 @Module({
   imports: [
-    ProductModule,
+    InvoiceModule,
     MongooseModule.forRoot ('mongodb+srv://root:root@cluster0.frpti.mongodb.net/db_onlyPans3',{
     useNewUrlParser: true
     }),
