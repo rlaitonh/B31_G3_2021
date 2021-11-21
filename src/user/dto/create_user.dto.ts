@@ -1,4 +1,4 @@
-export class createUserDTO {
+export class CreateUserDTO {
 
     readonly firstname: string;
     readonly lastname: string;
