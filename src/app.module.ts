@@ -4,8 +4,8 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
-import { UserModule } from './user/user.module';
 import { InvoiceModule } from './invoice/invoice.module';
+import { CartItemModule } from './cart-item/cart-item.module';
 
 @Module({
   imports: [
@@ -14,8 +14,8 @@ import { InvoiceModule } from './invoice/invoice.module';
     useNewUrlParser: true
     }),
     ShoppingCartModule,
-    UserModule,
     InvoiceModule,
+    CartItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

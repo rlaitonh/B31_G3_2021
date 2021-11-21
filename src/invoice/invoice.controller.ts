@@ -9,20 +9,14 @@ export class InvoiceController {
     async getInvoice(@Res() res){
         const invoice = await this.invoiceService.getInvoices();
         
-        return res.status(HttpStatus.OK).json({
-            message:'Invoice listed',
-            data: invoice
-        });
+        return res.status(HttpStatus.OK).send(invoice);
     }  
     @Post("/create")
     async createInvoice(@Res() res, @Body() createInvoiceDTO: createInvoiceDTO){
 
         const Invoice = await this.invoiceService.createInvoice(createInvoiceDTO);
 
-        return res.status(HttpStatus.CREATED).json({
-            message:'Invoice created',
-            data: Invoice
-        });
+        return res.status(HttpStatus.CREATED).send(Invoice);
     }
     @Delete('/delete')
     async deleteInvoice(@Res() res, @Query('invoiceId') id){
@@ -33,9 +27,6 @@ export class InvoiceController {
             throw new NotFoundException('Invoice does not exists');
         }
 
-        return res.status(HttpStatus.OK).json({
-            message: 'Invoice deleted',
-            data: invoice
-        });
+        return res.status(HttpStatus.OK).send(invoice);
     }  
 }

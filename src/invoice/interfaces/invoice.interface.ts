@@ -7,6 +7,6 @@ export interface IInvoice extends Document {
     readonly phone: string;
     readonly address: string;
     readonly documentId: number;
-    readonly products: [];
+    //readonly products: [];
     readonly orderDate: Date; 
 }

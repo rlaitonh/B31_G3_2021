@@ -10,9 +10,7 @@ export class ProductController {
     async getProductList(@Res() res){
         const products = await this.productService.getProducts();
 
-        return res.status(HttpStatus.OK).json({
-            data: products
-        });
+        return res.status(HttpStatus.OK).send(products);
     }
 
     @Get('/getBy')
@@ -28,10 +26,7 @@ export class ProductController {
             throw new NotFoundException('Student does not exists');
         }
 
-        return res.status(HttpStatus.OK).json({
-            message: 'product found',
-            data: product
-        });
+        return res.status(HttpStatus.OK).send(product);
     }    
     
     @Get('id/:productId')
@@ -40,9 +35,7 @@ export class ProductController {
         if (!product){
             throw new NotFoundException('product does not found');
         }
-        return Res.status(HttpStatus.OK).json({
-            data: product
-        });
+        return Res.status(HttpStatus.OK).send(product);
     }
     @Get('name/:productName')
     async getProductByName(@Res() Res, @Param('productName')name){
@@ -50,9 +43,7 @@ export class ProductController {
         if (!product){
             throw new NotFoundException('product does not found');
         }
-        return Res.status(HttpStatus.OK).json({
-            data: product
-        });
+        return Res.status(HttpStatus.OK).send(product);
     }
     @Get('category/:productCategory')
     async getProductByCategory(@Res() Res, @Param('productCategory')category){
@@ -60,31 +51,25 @@ export class ProductController {
         if (!product){
             throw new NotFoundException('product does not found');
         }
-        return Res.status(HttpStatus.OK).json({
-            data: product
-        });
+        return Res.status(HttpStatus.OK).send(product);
     }
     @Post('create')
     async createNewProduct(@Res() res, @Body() createProductDTO:CreateProductDTO  ){
         
         const product = await this.productService.createProduct(createProductDTO);
 
-        return res.status(HttpStatus.CREATED).json({
-            data: product
-        });
+        return res.status(HttpStatus.CREATED).send(product);
 
     }
-    @Put('/update/:studentId')
-    async updateStudent(  @Res() res, @Body() createProductDTO: CreateProductDTO, @Param('studentId') id){
+    @Put('/update/:productId')
+    async updateStudent(  @Res() res, @Body() createProductDTO: CreateProductDTO, @Param('productId') id){
         const product = await this.productService.updateProduct(id, createProductDTO);
 
         if(!product){
-            throw new NotFoundException('Student does not exists');
+            throw new NotFoundException('product does not exists');
         }
 
-        return res.status(HttpStatus.OK).json({
-            message: 'Student updated',
-            product        });
+        return res.status(HttpStatus.OK).send(product);
     }
     @Delete('/delete')
     async deleteStudent(@Res() res, @Query('productId') id){
@@ -95,9 +80,6 @@ export class ProductController {
             throw new NotFoundException('Student does not exists');
         }
 
-        return res.status(HttpStatus.OK).json({
-            message: 'Student deleted',
-            data: product
-        });
+        return res.status(HttpStatus.OK).send(product);
     }
 }

@@ -7,7 +7,7 @@ export const InvoiceSchema = new Schema({
     phone: {type: Number, required: true},
     address: {type: String, required: true},
     documentId: {type: Number, required: true},
-    products: { type: [], required: true},
+    //products: { type: [], required: true},
     orderDate: {
         type: Date,
         default: Date.now
