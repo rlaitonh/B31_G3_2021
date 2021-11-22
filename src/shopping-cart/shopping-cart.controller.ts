@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, ForbiddenException, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { CreateProductDTO } from 'src/cart-item/dto/create_product.dto';
 import { ShoppingCartService } from './shopping-cart.service';
 
@@ -13,8 +13,15 @@ export class ShoppingCartController {
 
     @Post('create/:userId')
     async addCartItem(@Res() res, @Body() createProductDTO:CreateProductDTO, @Param('userId') userId){
-        const cart = await this.shoppingCartService.addCartItem(createProductDTO, userId);
-        return res.status(HttpStatus.CREATED).send(cart);
+       // const cart = await this.shoppingCartService.addCartItem(createProductDTO, userId);
+        
+        const cart = await this.shoppingCartService.getCartByUser(userId);
+        if (!cart){
+            const cart = await this.shoppingCartService.addCartItem(createProductDTO, userId)
+            return res.status(HttpStatus.CREATED).send(cart)
+        }
+        return "no sirvió";
+        //throw new ForbiddenException()
     }
     /*
     @Get()

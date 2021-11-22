@@ -4,7 +4,7 @@ export const UserSchema = new Schema ({
 
     firstname: {type: String, required:true},
     lastname: {type: String, required:true},
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     state: {
         type: String, 
@@ -18,6 +18,7 @@ export const UserSchema = new Schema ({
         default: 'Customer',
         enum: ['Customer', 'Manager']
     }
+
 });
 
 
