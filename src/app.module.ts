@@ -7,6 +7,7 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { CartItemModule } from './cart-item/cart-item.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from './user/user.module';
     InvoiceModule,
     CartItemModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
